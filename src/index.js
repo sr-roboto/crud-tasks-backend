@@ -12,10 +12,9 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 //rutas
-
+app.use(require('./routes/tasks.routes'));
 
 //en escucha
 app.listen(PORT,() => {
     console.log('servidor corriendo en el puerto:'+ PORT);
-    
 })
