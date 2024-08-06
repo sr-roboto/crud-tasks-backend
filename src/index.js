@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
+const router = require('./routes/tasks.routes')
 
 //inicializamos
 const app = express();
@@ -12,7 +13,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 //rutas
-app.use(require('./routes/tasks.routes'));
+app.use(router);
 
 //en escucha
 app.listen(PORT,() => {
