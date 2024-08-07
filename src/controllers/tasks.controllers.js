@@ -4,7 +4,7 @@ const ctrl = {};
 //CRUD
 ctrl.crearTareas = async (req, res) => {
     const { title, description, isComplete } = req.body;
-    if (!title.trim() || !description.trim() || title.length > 255 || typeof isComplete !== "boolean") {
+    if (!title.trim() || !description.trim()) {
         let msg = "el titulo y la descripcion no pueden estar vacios";
         if (typeof isComplete !== "boolean") {
             msg = "tipo de dato incorrecto"
@@ -22,7 +22,7 @@ ctrl.crearTareas = async (req, res) => {
     } catch (err) {
         return res.status(500).send("Error al crear la tarea");
     } finally {
-        if (connection) connection.end();
+        if (connection) connection.end(); //cerramos la conexion
     }
 }
 
@@ -31,11 +31,11 @@ ctrl.obtenerTareas = async (req, res) => {
     try {
         const sql = `SELECT * FROM tasks`;
         const [result] = await connection.query(sql)
-        return res.status(200).json(result[0]);
+        return res.status(200).json(result);
     } catch (err) {
         return res.status(500).send('error al obtener las tareas');
     } finally {
-        if (connection) connection.end();
+        if (connection) connection.end(); //cerramos la conexion
     }
 }
 
@@ -52,7 +52,7 @@ ctrl.obtenerTarea = async (req, res) => {
     } catch (err) {
         return res.status(500).send('error al obtener tarea')
     } finally {
-        if (connection) connection.end();
+        if (connection) connection.end(); //cerramos la conexion
     }
 }
 
@@ -70,24 +70,24 @@ ctrl.actualizarTarea = async (req, res) => {
     } catch (err) {
         return res.status(500).send('error al editar tarea');
     } finally {
-        if (connection) connection.end()
+        if (connection) connection.end() //cerramos la conexion
     }
 }
 
 ctrl.eliminarTarea = async (req, res) => {
-    const user = req.params['id'];
+    const {id} = req.params;
     const connection = await connectDb();
+    const [result] = await connection.query('SELECT * FROM tasks WHERE id = ?', id);
     try {
-        const sql = `DELETE * FROM tasks WHERE id = ?`;
-        const [result] = await connection.query(sql, user);
-        if (result.affectedRows === 0) {
-            return res.status(404).send('tarea no encontrada')
+        if(id == result[0].id) {
+            await connection.query('DELETE FROM tasks WHERE id = ?', id)
+            return res.status(200).send('tarea eliminada correctamente');   
         }
-        return res.status(200).send('tarea eliminada correctamente');
+        return res.status(404).send('tarea no encontrada')
     } catch (err) {
         return res.status(500).send('error al eliminar la tarea');
     } finally {
-        if (connection) connection.end();
+        if (connection) connection.end(); //cerramos la conexion
     }
 }
 
