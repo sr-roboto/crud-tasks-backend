@@ -15,7 +15,7 @@ app.use(express.json());
 //rutas
 app.use(router);
 
-//en escucha
+//ponemos el servidor en escucha
 app.listen(PORT,() => {
     console.log('servidor corriendo en el puerto:'+ PORT);
 })

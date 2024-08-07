@@ -1,6 +1,7 @@
 const { connectDb } = require('../database/db.js');
 const ctrl = {};
 
+//CRUD
 ctrl.crearTareas = async (req, res) => {
     const { title, description, isComplete } = req.body;
     if (!title.trim() || !description.trim() || title.length > 255 || typeof isComplete !== "boolean") {
