@@ -1,20 +1,9 @@
 import {connectDb} from '../database/db.js';
-const ctrl = {};
 
 
 //CRUD
 export const crearTareas = async (req, res) => {
     const { title, description, isComplete } = req.body;
-    if (!title.trim() || !description.trim()) {
-        let msg = "el titulo y la descripcion no pueden estar vacios";
-        if (typeof isComplete !== "boolean") {
-            msg = "tipo de dato incorrecto"
-        }
-        if (title.length > 255) {
-            msg = "el titulo o puede tener mas de 255 caracteres "
-        }
-        return res.status(400).send(msg);
-    }
     const connection = await connectDb();
     try {
         const sql = `INSERT INTO tasks (title, description, isComplete) VALUES (?,?,?)`;
