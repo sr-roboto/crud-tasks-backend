@@ -1,4 +1,4 @@
-import {connectDb} from '../database/db.js';
+import { connectDb } from '../database/db.js';
 
 
 //CRUD
@@ -65,13 +65,13 @@ export const actualizarTarea = async (req, res) => {
 }
 
 export const eliminarTarea = async (req, res) => {
-    const {id} = req.params;
+    const { id } = req.params;
     const connection = await connectDb();
     const [result] = await connection.query('SELECT * FROM tasks WHERE id = ?', id);
     try {
-        if(id == result[0].id) {
+        if (id == result[0].id) {
             await connection.query('DELETE FROM tasks WHERE id = ?', id)
-            return res.status(200).send('tarea eliminada correctamente');   
+            return res.status(200).send('tarea eliminada correctamente');
         }
         return res.status(404).send('tarea no encontrada')
     } catch (err) {
