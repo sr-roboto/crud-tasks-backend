@@ -1,9 +1,7 @@
-import {connectDb} from '../database/db.js';
-const ctrl = {};
-
+const connectDb = require('../database/db.js')
 
 //CRUD
-export const crearTareas = async (req, res) => {
+const crearTareas = async (req, res) => {
     const { title, description, isComplete } = req.body;
     if (!title.trim() || !description.trim()) {
         let msg = "el titulo y la descripcion no pueden estar vacios";
@@ -27,7 +25,7 @@ export const crearTareas = async (req, res) => {
     }
 }
 
-export const obtenerTareas = async (req, res) => {
+const obtenerTareas = async (req, res) => {
     const connection = await connectDb();
     try {
         const sql = `SELECT * FROM tasks`;
@@ -40,7 +38,7 @@ export const obtenerTareas = async (req, res) => {
     }
 }
 
-export const obtenerTarea = async (req, res) => {
+const obtenerTarea = async (req, res) => {
     const user = req.params['id'];
     const connection = await connectDb();
     try {
@@ -57,7 +55,7 @@ export const obtenerTarea = async (req, res) => {
     }
 }
 
-export const actualizarTarea = async (req, res) => {
+const actualizarTarea = async (req, res) => {
     const user = req.params['id'];
     const { title, description, isComplete } = req.body;
     const connection = await connectDb();
@@ -75,7 +73,7 @@ export const actualizarTarea = async (req, res) => {
     }
 }
 
-export const eliminarTarea = async (req, res) => {
+const eliminarTarea = async (req, res) => {
     const {id} = req.params;
     const connection = await connectDb();
     const [result] = await connection.query('SELECT * FROM tasks WHERE id = ?', id);
@@ -90,6 +88,14 @@ export const eliminarTarea = async (req, res) => {
     } finally {
         if (connection) connection.end(); //cerramos la conexion
     }
+}
+
+module.exports = {
+    crearTareas,
+    obtenerTarea,
+    obtenerTareas,
+    actualizarTarea,
+    eliminarTarea
 }
 
 
