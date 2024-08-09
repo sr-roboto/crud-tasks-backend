@@ -1,7 +1,7 @@
-const express = require('express');
-const morgan = require('morgan');
-const cors = require('cors');
-const router = require('./routes/tasks.routes')
+import express from 'express';
+import morgan  from 'morgan';
+import cors from 'cors';
+import {router} from '../src/routes/tasks.routes.js';
 
 //inicializamos
 const app = express();
@@ -16,6 +16,6 @@ app.use(express.json());
 app.use(router);
 
 //ponemos el servidor en escucha
-app.listen(PORT,() => {
-    console.log('servidor corriendo en el puerto:'+ PORT);
+app.listen(PORT, () => {
+    console.log('servidor corriendo en el puerto:' + PORT);
 })

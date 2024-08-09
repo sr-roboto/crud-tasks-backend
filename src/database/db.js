@@ -1,4 +1,4 @@
-const mysql = require('mysql2/promise');
+import mysql from 'mysql2/promise';
 
 //creamos la conexion con nuestra base de datos
 const connectDb = async () => {
@@ -16,6 +16,4 @@ const connectDb = async () => {
     }
 }
 
-module.exports = {
-    connectDb
-}
+export {connectDb};
