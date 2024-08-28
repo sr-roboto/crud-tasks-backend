@@ -1,24 +1,23 @@
-import { useState } from 'react';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './views/home';
+import Login from './views/Login';
+import Register from './views/Register';
+import Tasks from './views/Tasks';
+import TaskForm from './views/TaskForm';
+import Navbar from './components/Navbar';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/tasks" element={<Tasks />} />
+        <Route path="/tasks/new" element={<TaskForm />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
