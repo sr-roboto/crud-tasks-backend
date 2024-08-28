@@ -1,13 +1,19 @@
-import express from 'express';
-const router = express.Router();
-import { obtenerTarea, obtenerTareas, actualizarTarea, eliminarTarea, crearTareas } from '../controllers/tasks.controllers.js'
-import { validacionesDeTaskCreate, validacionesDeTaskDelete, validacionesDeTaskUpdate } from '../validations/tasks.validations.js';
-import { applyValidations } from '../middlewares/applyValidations.js';
+import { Router } from 'express';
+import {
+  createTask,
+  getTask,
+  getTasks,
+  updateTask,
+  deleteTask,
+} from '../controllers/tasks.controllers.js';
+const routerTasks = Router();
+import { validateSchema } from '../middlewares/apply.validations.js';
+import { createTaskSchema, updateTaskSchema } from '../schemas/task.schema.js';
 
-router.post('/tasks', validacionesDeTaskCreate, applyValidations, crearTareas);
-router.get('/tasks', obtenerTareas);
-router.get('/task/:id', obtenerTarea);
-router.put('/task/:id', validacionesDeTaskUpdate, applyValidations, actualizarTarea);
-router.delete('/task/:id', validacionesDeTaskDelete, applyValidations, eliminarTarea);
+routerTasks.post('/tasks', validateSchema(createTaskSchema), createTask);
+routerTasks.get('/tasks', getTasks);
+routerTasks.get('/tasks/:id', getTask);
+routerTasks.put('/tasks/:id', validateSchema(updateTaskSchema), updateTask);
+routerTasks.delete('/tasks/:id', deleteTask);
 
-export { router };
+export { routerTasks };
