@@ -1,8 +1,18 @@
 import z from 'zod';
 
 const createTaskSchema = z.object({
-  title: z.string().min(1).max(255),
-  description: z.string().min(1).max(255),
+  title: z
+    .string(
+      'The title must be a string with at least 1 character and a maximum of 255  characters'
+    )
+    .min(1)
+    .max(255),
+  description: z
+    .string(
+      'The description must be a string with at least 1 character and a maximum of 255 characters'
+    )
+    .min(1)
+    .max(255),
 });
 
 const updateTaskSchema = z.object({
