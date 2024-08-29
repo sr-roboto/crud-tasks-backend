@@ -5,7 +5,7 @@ import { connectDB } from './database/db.js';
 //ponemos el servidor en escucha
 app.listen(PORT, () => {
   connectDB();
-  console.log(`servidor corriendo en el puerto: ${PORT}`);
+  console.log(`🚀 servidor corriendo en el puerto: ${PORT} 🚀`);
 });
 
 export { app };
