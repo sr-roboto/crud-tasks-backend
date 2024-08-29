@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom';
+
 function Navbar() {
   return (
-    <div className="navbar bg-base-300 sticky top-0">
+    <div className="navbar bg-base-300 sticky top-0 font-mono">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -42,28 +44,20 @@ function Navbar() {
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <Link className="btn btn-ghost text-xl" to="/">
+          QwertyQuick
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="menu menu-horizontal px-1  text-base">
           <li>
-            <a>Item 1</a>
+            <a>crear tarea</a>
           </li>
           <li>
-            <details>
-              <summary>Parent</summary>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </details>
+            <a>lista de tareas</a>
           </li>
           <li>
-            <a>Item 3</a>
+            <a>perfil</a>
           </li>
         </ul>
       </div>

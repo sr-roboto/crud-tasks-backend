@@ -1,49 +1,30 @@
+import { Link } from 'react-router-dom';
+
 function Home() {
   return (
-    <div className="md:mx-auto">
-      <div className="hero bg-base-200 min-h-screen">
+    <div className="md:mx-auto font-mono ">
+      <div className="hero bg-base-200 min-h-screen bg-gradient-to-b from-stone-900 to-stone-950">
         <div className="hero-content flex-col lg:flex-row-reverse">
-          <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Login now!</h1>
-            <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
+          <img
+            src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
+            className="max-w-sm rounded-lg shadow-2xl "
+          />
+          <div className=" ">
+            <h1 className="text-5xl font-black">¡Un forastero!</h1>
+            <p className="py-6 min-h-2 break-words prose font-extralight text-lg">
+              Este proyecto está siendo desarrollado para el{' '}
+              <span className="text-lime-500">
+                <Link to="https://ipf.edu.ar/">
+                  Instituto Polocientífico de Formosa
+                </Link>
+              </span>
+              , con el objetivo de gestionar tareas de manera eficiente mediante
+              una aplicación backend basada en CRUD. Se busca optimizar la
+              administración y el seguimiento de tareas.
             </p>
-          </div>
-          <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-            <form className="card-body">
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Email</span>
-                </label>
-                <input
-                  type="email"
-                  placeholder="email"
-                  className="input input-bordered"
-                  required
-                />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Password</span>
-                </label>
-                <input
-                  type="password"
-                  placeholder="password"
-                  className="input input-bordered"
-                  required
-                />
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
-                </label>
-              </div>
-              <div className="form-control mt-6">
-                <button className="btn btn-primary">Login</button>
-              </div>
-            </form>
+            <button className="btn btn-primary ">
+              <Link to="/Login">Comenzar</Link>
+            </button>
           </div>
         </div>
       </div>
