@@ -1,14 +1,12 @@
 import { Link } from 'react-router-dom';
+import img from '../assets/droll.svg';
 
 function Home() {
   return (
     <div className="md:mx-auto font-mono ">
       <div className="hero bg-base-200 min-h-screen bg-gradient-to-b from-stone-900 to-stone-950">
         <div className="hero-content flex-col lg:flex-row-reverse">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
-            className="max-w-sm rounded-lg shadow-2xl "
-          />
+          <img src={img} className="max-w-sm rounded-lg w-screen" />
           <div className=" ">
             <h1 className="text-5xl font-black">¡Un forastero!</h1>
             <p className="py-6 min-h-2 break-words prose font-extralight text-lg">
