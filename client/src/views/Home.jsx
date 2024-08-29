@@ -6,7 +6,10 @@ function Home() {
     <div className="md:mx-auto font-mono ">
       <div className="hero bg-base-200 min-h-screen bg-gradient-to-b from-stone-900 to-stone-950">
         <div className="hero-content flex-col lg:flex-row-reverse">
-          <img src={img} className="max-w-sm rounded-lg w-screen" />
+          <img
+            src={img}
+            className="max-w-sm rounded-lg w-screen animate-bounce"
+          />
           <div className=" ">
             <h1 className="text-5xl font-black">¡Un forastero!</h1>
             <p className="py-6 min-h-2 break-words prose font-extralight text-lg">
