@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import useAuth from '../context/useAuth.js';
-import { ButtonLink } from './ui/ButtonLink';
+import plus from '../assets/img/Plus.svg';
+import LogOut from '../assets/img/Logout.svg';
 
 function Navbar() {
   const { isAuthenticated, logout, user } = useAuth();
@@ -10,7 +11,7 @@ function Navbar() {
     <>
       {isAuthenticated ? (
         <>
-          <div className="navbar bg-base-300 sticky top-0 font-mono">
+          <div className="navbar bg-primary text-white sticky top-0">
             <div className="navbar-start">
               <div className="dropdown">
                 <div
@@ -39,11 +40,13 @@ function Navbar() {
                 >
                   <li>Welcome {user.username}</li>
                   <li>
-                    <ButtonLink to="/add-task">Add Task</ButtonLink>
+                    <Link to="/add-task">
+                      <img src={plus} />
+                    </Link>
                   </li>
                   <li>
                     <Link to="/" onClick={() => logout()}>
-                      Logout
+                      <img src={LogOut} />
                     </Link>
                   </li>
                 </ul>
@@ -55,17 +58,17 @@ function Navbar() {
                 QwertyQuick
               </Link>
             </div>
-            <p className="text-center">
-              Bienvenido: <span className="text-success">{user.username}</span>
-            </p>
+            <p className="text-center">{user.username}</p>
             <div className="navbar-end hidden lg:flex">
               <ul className="menu menu-horizontal px-1  text-base">
                 <li>
-                  <Link to="/add-task">Add Task</Link>
+                  <Link to="/add-task">
+                    <img src={plus} />
+                  </Link>
                 </li>
                 <li>
                   <Link to="/" onClick={() => logout()}>
-                    Logout
+                    <img src={LogOut} />
                   </Link>
                 </li>
               </ul>
@@ -74,7 +77,7 @@ function Navbar() {
         </>
       ) : (
         <>
-          <div className="navbar bg-base-300 sticky top-0 font-mono flex justify-start">
+          <div className="navbar bg-primary text-white sticky top-0 flex justify-start">
             {' '}
             {/* Modified line */}
             <div className="navbar-start">

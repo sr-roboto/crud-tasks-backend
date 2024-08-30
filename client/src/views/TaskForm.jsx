@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Card, Input, Label } from '../components/ui';
+import { Button, Card, Input } from '../components/ui';
 import useTasks from '../context/useTasks';
 import { Textarea } from '../components/ui/Textarea';
 import { useForm } from 'react-hook-form';
@@ -28,7 +28,6 @@ function TaskForm() {
       navigate('/tasks');
     } catch (error) {
       console.log(error);
-      // window.location.href = "/";
     }
   };
 
@@ -44,31 +43,38 @@ function TaskForm() {
   }, [params.id, setValue, getTask]);
 
   return (
-    <Card>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Label htmlFor="title">Title</Label>
-        <Input
-          type="text"
-          name="title"
-          placeholder="Title"
-          {...register('title')}
-          autoFocus
-        />
-        {errors.title && (
-          <p className="text-red-500 text-xs italic">Please enter a title.</p>
-        )}
-
-        <Label htmlFor="description">Description</Label>
-        <Textarea
-          name="description"
-          id="description"
-          rows="3"
-          placeholder="Description"
-          {...register('description')}
-        ></Textarea>
-        <Button>Save</Button>
-      </form>
-    </Card>
+    <div className="h-[calc(100vh-10px)] flex items-center justify-center bg-base-200">
+      <Card>
+        <form className="card-body gap-4" onSubmit={handleSubmit(onSubmit)}>
+          <div className="form-control ">
+            <Input
+              type="text"
+              name="title"
+              placeholder="Title"
+              {...register('title')}
+              autoFocus
+            />
+            {errors.title && (
+              <p className="text-red-500 text-xs italic">
+                Please enter a title.
+              </p>
+            )}
+          </div>
+          <div className="form-control ">
+            <Textarea
+              name="description"
+              id="description"
+              rows="3"
+              placeholder="Description"
+              {...register('description')}
+            ></Textarea>
+          </div>
+          <div className="form-control ">
+            <Button>Guardar</Button>
+          </div>
+        </form>
+      </Card>
+    </div>
   );
 }
 

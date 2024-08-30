@@ -3,18 +3,18 @@ import img from '../assets/droll.svg';
 
 function Home() {
   return (
-    <div className="md:mx-auto font-mono ">
-      <div className="hero bg-base-200 min-h-screen bg-gradient-to-b from-stone-900 to-stone-950">
+    <div className="md:mx-auto ">
+      <div className="hero bg-base-200 min-h-screen">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <img
             src={img}
             className="max-w-sm rounded-lg w-screen animate-bounce"
           />
-          <div className=" ">
-            <h1 className="text-5xl font-black">¡Un forastero!</h1>
-            <p className="py-6 min-h-2 break-words prose font-extralight text-lg">
+          <div className="gap-5 space-y-4">
+            <h1 className="text-5xl font-bold">¡Un forastero!</h1>
+            <p className=" min-h-2 break-words prose font-light text-lg">
               Este proyecto está siendo desarrollado para el{' '}
-              <span className="text-lime-500">
+              <span className="text-secondary text-opacity-75 hover:text-opacity-100 transition-opacity">
                 <Link to="https://ipf.edu.ar/">
                   Instituto Polocientífico de Formosa
                 </Link>
@@ -23,9 +23,6 @@ function Home() {
               una aplicación backend basada en CRUD. Se busca optimizar la
               administración y el seguimiento de tareas.
             </p>
-            <button className="btn btn-primary ">
-              <Link to="/Login">Comenzar</Link>
-            </button>
           </div>
         </div>
       </div>
