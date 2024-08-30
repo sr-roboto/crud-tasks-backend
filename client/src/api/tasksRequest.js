@@ -3,7 +3,9 @@ import axios from './axios.js';
 const createTaskRequest = async () => {
   try {
     const response = await axios.post('/tasks');
-    return response;
+    console.log(response);
+
+    return response.data;
   } catch (error) {
     console.log(error);
   }
@@ -12,7 +14,7 @@ const createTaskRequest = async () => {
 const getTasksRequest = async () => {
   try {
     const response = await axios.get('/tasks');
-    return response;
+    return response.data;
   } catch (error) {
     console.error(error);
   }
@@ -21,7 +23,7 @@ const getTasksRequest = async () => {
 const getTaskRequest = async (id) => {
   try {
     const response = await axios.get(`/tasks/${id}`);
-    return response;
+    return response.data;
   } catch (error) {
     console.error(error);
   }
@@ -30,7 +32,7 @@ const getTaskRequest = async (id) => {
 const updateTaskRequest = async (id, task) => {
   try {
     const response = await axios.put(`/tasks/${id}`, task);
-    return response;
+    return response.data;
   } catch (error) {
     console.log(error);
   }
@@ -39,7 +41,7 @@ const updateTaskRequest = async (id, task) => {
 const deleteTaskRequest = async (id) => {
   try {
     const response = await axios.delete(`/tasks/${id}`);
-    return response;
+    return response.data;
   } catch (error) {
     console.log(error);
   }

@@ -13,6 +13,7 @@ const createTaskSchema = z.object({
     )
     .min(1)
     .max(255),
+  done: z.boolean().optional(),
 });
 
 const updateTaskSchema = z.object({

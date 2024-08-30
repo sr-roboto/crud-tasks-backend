@@ -6,14 +6,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 function TaskForm() {
   const { register, handleSubmit } = useForm();
   const { getTask, createTask, updateTask } = useTasks();
-  const { id } = useParams();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (id) {
-      getTask(id);
-    }
-  }, [id, getTask]);
 
   const onSubmit = handleSubmit(async (data) => {
     await createTask(data);

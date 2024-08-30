@@ -21,13 +21,13 @@ const TasksProvider = ({ children }) => {
       return res;
     } catch (error) {
       console.log('Error creating task', error);
+      return undefined;
     }
   };
 
   const getTasks = async () => {
     try {
       const res = await getTasksRequest();
-
       setTasks(res);
     } catch (error) {
       console.error('Error fetching tasks', error);
