@@ -1,48 +1,54 @@
-import { axios } from './axios.js';
+import axios from './axios.js';
 
-const createTask = async () => {
+const createTaskRequest = async () => {
   try {
     const response = await axios.post('/tasks');
-    return response.data;
+    return response;
   } catch (error) {
     console.log(error);
   }
 };
 
-const getTasks = async () => {
+const getTasksRequest = async () => {
   try {
     const response = await axios.get('/tasks');
-    return response.data;
+    return response;
   } catch (error) {
     console.error(error);
   }
 };
 
-const getTask = async (task) => {
+const getTaskRequest = async (id) => {
   try {
-    const response = await axios.get(`/tasks/${task.id}`);
-    return response.data;
+    const response = await axios.get(`/tasks/${id}`);
+    return response;
   } catch (error) {
     console.error(error);
   }
 };
 
-const updateTask = async (task) => {
+const updateTaskRequest = async (id, task) => {
   try {
-    const response = await axios.put(`/tasks/${task.id}`);
-    return response.data;
+    const response = await axios.put(`/tasks/${id}`, task);
+    return response;
   } catch (error) {
     console.log(error);
   }
 };
 
-const deleteTask = async (task) => {
+const deleteTaskRequest = async (id) => {
   try {
-    const response = await axios.delete(`/tasks/${task.id}`);
-    return response.data;
+    const response = await axios.delete(`/tasks/${id}`);
+    return response;
   } catch (error) {
     console.log(error);
   }
 };
 
-export { createTask, getTasks, getTask, updateTask, deleteTask };
+export {
+  createTaskRequest,
+  getTasksRequest,
+  getTaskRequest,
+  updateTaskRequest,
+  deleteTaskRequest,
+};

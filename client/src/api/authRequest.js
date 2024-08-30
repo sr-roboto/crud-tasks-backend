@@ -1,21 +1,21 @@
-import { axios } from './axios.js';
+import axios from './axios.js';
 
-const login = async (user) => {
+const loginRequest = async (user) => {
   try {
     const response = await axios.post('/login', user);
-    return response.data;
+    return response;
   } catch (error) {
     console.error(error);
   }
 };
 
-const register = async (user) => {
+const registerRequest = async (user) => {
   try {
     const response = await axios.post('/register', user);
-    return response.data;
+    return response;
   } catch (error) {
     console.error(error);
   }
 };
 
-export { login, register };
+export { loginRequest, registerRequest };

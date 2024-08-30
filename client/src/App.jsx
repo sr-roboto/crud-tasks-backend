@@ -5,19 +5,26 @@ import Register from './views/Register';
 import Tasks from './views/Tasks';
 import TaskForm from './views/TaskForm';
 import Navbar from './components/Navbar';
+import { AuthProvider } from './context/AuthContext';
+import { TasksProvider } from './context/TasksContext';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/tasks" element={<Tasks />} />
-        <Route path="/tasks/new" element={<TaskForm />} />
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <TasksProvider>
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+
+            <Route path="/tasks" element={<Tasks />} />
+            <Route path="/tasks/new" element={<TaskForm />} />
+          </Routes>
+        </BrowserRouter>
+      </TasksProvider>
+    </AuthProvider>
   );
 }
 

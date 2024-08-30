@@ -1,10 +1,25 @@
+import { useEffect } from 'react';
+import useTasks from '../context/useTasks';
+import TasksCard from '../components/TaskCard';
+
 function Tasks() {
+  // Asegurarse de que tasks sea un array
+  const { getTasks, tasks } = useTasks();
+  console.log(tasks);
+
+  const taskArray = tasks.data || [];
+
+  useEffect(() => {
+    getTasks();
+  }, []);
+
   return (
-    <div className="container mx-auto">
-      <div className="grid grid-cols-4 gap-4">
-        <h1>Tareas</h1>
+    <>
+      <div>
+        <h1>Tasks</h1>
+        <TasksCard tasks={taskArray} />
       </div>
-    </div>
+    </>
   );
 }
 
