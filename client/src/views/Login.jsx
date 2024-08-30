@@ -1,26 +1,23 @@
+import useAuth from '../context/useAuth';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import useAuth from '../context/useAuth';
 import { useEffect } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Card, Message, Button, Input } from '../components/ui';
+import { loginSchema } from '../schemas/auth';
 
 function Login() {
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-  const { login, error, isAuthenticated } = useAuth();
-
-  const onSubmit = handleSubmit(async (data) => {
-    try {
-      await login(data);
-      console.log('usuario logueado con exito', data);
-      navigate('/tasks');
-    } catch (error) {
-      console.error('Error logging in', error);
-    }
+  } = useForm({
+    resolver: zodResolver(loginSchema),
   });
+  const { signin, errors: loginErrors, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  const onSubmit = (data) => signin(data);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -29,56 +26,45 @@ function Login() {
   }, [isAuthenticated, navigate]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-stone-900 to-stone-950">
-      <div className="card bg-base-100 max-w-sm shrink-0 shadow-xl border-primary border-2">
-        <form className="card-body gap-4" onSubmit={onSubmit}>
-          {error && (
-            <div className="bg-red-900 text-white p-2 rounded-lg font-mono animate-fade-in-out">
-              {error.error.map((err, index) => (
-                <div className="py-2" key={index}>
-                  <span className="font-bold text-red-500">ERROR : </span>
-                  <span className="text-slate-200">{err}</span>
-                </div>
-              ))}
-            </div>
-          )}
+    <div className="h-[calc(100vh-100px)] flex items-center justify-center">
+      <Card>
+        {loginErrors.map((error, i) => (
+          <Message message={error} key={i} />
+        ))}
+
+        <h1 className="text-3xl text-center font-bold">Iniciar Sesión</h1>
+        <form className="card-body gap-4" onSubmit={handleSubmit(onSubmit)}>
           <div className="form-control ">
-            <input
+            <Input
+              label="Write your email"
               type="email"
-              placeholder="email"
-              className="input input-bordered"
+              name="email"
+              placeholder="youremail@domain.tld"
               {...register('email', { required: true })}
             />
-            {errors.email && (
-              <span className="text-red-500">This field is required</span>
-            )}
+            <p>{errors.email?.message}</p>
           </div>
-          <div className="form-control">
-            <input
+          <div className="form-control ">
+            <Input
               type="password"
-              placeholder="password"
-              className="input input-bordered"
-              required
-              {...register('password', { required: true })}
+              name="password"
+              placeholder="Write your password"
+              {...register('password', { required: true, minLength: 6 })}
             />
-            {errors.password && (
-              <span className="text-red-500">This field is required</span>
-            )}
+            <p>{errors.password?.message}</p>
+            <div className="form-control mt-6">
+              <Button>Aceptar</Button>
+            </div>
           </div>
-          <div className="form-control mt-6">
-            <button className="btn btn-primary" type="submit">
-              Iniciar Sesión
-            </button>
-          </div>
-          <label>
-            No estas registrado?
-            <Link className="hover:text-secondary" to="/Register">
-              {' '}
-              Registrate
-            </Link>
-          </label>
         </form>
-      </div>
+
+        <p className="text-center">
+          No estas registrado?{' '}
+          <Link to="/register" className="text-sky-500">
+            Registrate
+          </Link>
+        </p>
+      </Card>
     </div>
   );
 }

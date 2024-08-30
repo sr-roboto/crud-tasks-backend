@@ -1,4 +1,5 @@
 import { taskModel } from '../models/task.model.js';
+import { z } from 'zod';
 
 const createTask = async (req, res) => {
   const { title, description, done } = req.body;
@@ -36,7 +37,7 @@ const getTasks = async (req, res) => {
 
 const getTask = async (req, res) => {
   try {
-    const task = await taskModelask.findById(req.params.id);
+    const task = await taskModel.findById(req.params.id);
     if (!task) return res.status(404).json({ message: 'Task not found' });
     return res.json(task);
   } catch (error) {
@@ -51,7 +52,7 @@ const getTask = async (req, res) => {
 const updateTask = async (req, res) => {
   try {
     const { title, description, done } = req.body;
-    const taskUpdated = await Task.findOneAndUpdate(
+    const taskUpdated = await taskModel.findOneAndUpdate(
       { _id: req.params.id },
       { title, description, done },
       { new: true }

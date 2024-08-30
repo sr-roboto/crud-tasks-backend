@@ -1,40 +1,74 @@
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Button, Card, Input, Label } from '../components/ui';
 import useTasks from '../context/useTasks';
-import { useParams, useNavigate } from 'react-router-dom';
+import { Textarea } from '../components/ui/Textarea';
+import { useForm } from 'react-hook-form';
 
 function TaskForm() {
-  const { register, handleSubmit } = useForm();
-  const { getTask, createTask, updateTask } = useTasks();
+  const { createTask, getTask, updateTask } = useTasks();
   const navigate = useNavigate();
+  const params = useParams();
+  console.log(params.id);
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const onSubmit = handleSubmit(async (data) => {
-    await createTask(data);
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      if (params.id) {
+        updateTask(params.id, data);
+      } else {
+        createTask(data);
+      }
 
-    navigate('/tasks');
-  });
+      navigate('/tasks');
+    } catch (error) {
+      console.log(error);
+      // window.location.href = "/";
+    }
+  };
+
+  useEffect(() => {
+    if (params.id) {
+      const loadTask = async () => {
+        const task = await getTask(params.id);
+        setValue('title', task.title);
+        setValue('description', task.description);
+      };
+      loadTask();
+    }
+  }, [params.id, setValue, getTask]);
 
   return (
-    <div className="container mx-auto">
-      <div className="grid grid-cols-4 gap-4">
-        <form className="space-y-4" onSubmit={onSubmit}>
-          <input
-            label="Título"
-            type="text"
-            placeholder="Título de la tarea"
-            {...register('title')}
-          />
-          <input
-            label="Descripción"
-            type="text"
-            placeholder="Descripción de la tarea"
-            {...register('description')}
-          />
-          <button type="submit">Guardar</button>
-        </form>
-      </div>
-    </div>
+    <Card>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Label htmlFor="title">Title</Label>
+        <Input
+          type="text"
+          name="title"
+          placeholder="Title"
+          {...register('title')}
+          autoFocus
+        />
+        {errors.title && (
+          <p className="text-red-500 text-xs italic">Please enter a title.</p>
+        )}
+
+        <Label htmlFor="description">Description</Label>
+        <Textarea
+          name="description"
+          id="description"
+          rows="3"
+          placeholder="Description"
+          {...register('description')}
+        ></Textarea>
+        <Button>Save</Button>
+      </form>
+    </Card>
   );
 }
 

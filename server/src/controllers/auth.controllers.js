@@ -16,7 +16,7 @@ const createUser = async (req, res) => {
 
     const passwordHash = await bcrypt.hash(password, 10);
 
-    const newUser = new User({
+    const newUser = new userModel({
       username,
       email,
       password: passwordHash,
@@ -47,7 +47,7 @@ const createUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const userFound = await User.findOne({ email });
+    const userFound = await userModel.findOne({ email });
 
     if (!userFound)
       return res.status(400).json({

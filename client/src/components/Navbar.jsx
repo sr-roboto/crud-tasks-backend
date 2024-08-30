@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 import useAuth from '../context/useAuth.js';
+import { ButtonLink } from './ui/ButtonLink';
 
 function Navbar() {
-  const { logout, isAuthenticated } = useAuth();
+  const { isAuthenticated, logout, user } = useAuth();
+  console.log(isAuthenticated, user);
 
   return (
     <>
@@ -35,45 +37,35 @@ function Navbar() {
                   tabIndex={0}
                   className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
                 >
+                  <li>Welcome {user.username}</li>
                   <li>
-                    <a>Item 1</a>
+                    <ButtonLink to="/add-task">Add Task</ButtonLink>
                   </li>
                   <li>
-                    <a>Parent</a>
-                    <ul className="p-2">
-                      <li>
-                        <a>Submenu 1</a>
-                      </li>
-                      <li>
-                        <a>Submenu 2</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <a>Item 3</a>
+                    <Link to="/" onClick={() => logout()}>
+                      Logout
+                    </Link>
                   </li>
                 </ul>
               </div>
-              <Link className="btn btn-ghost text-xl" to="/">
+              <Link
+                className="btn btn-ghost text-xl"
+                to={isAuthenticated ? '/tasks' : '/'}
+              >
                 QwertyQuick
               </Link>
             </div>
+            <p className="text-center">
+              Bienvenido: <span className="text-success">{user.username}</span>
+            </p>
             <div className="navbar-end hidden lg:flex">
               <ul className="menu menu-horizontal px-1  text-base">
                 <li>
-                  <Link to="/tasks/new">Agregar Tarea</Link>
+                  <Link to="/add-task">Add Task</Link>
                 </li>
                 <li>
-                  <a>perfil</a>
-                </li>
-                <li>
-                  <Link
-                    to="/"
-                    onClick={() => {
-                      logout();
-                    }}
-                  >
-                    Cerra Sesión
+                  <Link to="/" onClick={() => logout()}>
+                    Logout
                   </Link>
                 </li>
               </ul>
@@ -112,14 +104,17 @@ function Navbar() {
                   className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
                 >
                   <li>
-                    <a>Item 1</a>
+                    <Link to="/login">Iniciar Sesión</Link>
                   </li>
                   <li>
-                    <a>Item 3</a>
+                    <Link to="/register">Registrarse</Link>
                   </li>
                 </ul>
               </div>
-              <Link className="btn btn-ghost text-xl" to="/">
+              <Link
+                className="btn btn-ghost text-xl"
+                to={isAuthenticated ? '/tasks' : '/'}
+              >
                 QwertyQuick
               </Link>
             </div>

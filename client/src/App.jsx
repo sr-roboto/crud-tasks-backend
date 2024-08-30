@@ -6,24 +6,28 @@ import Tasks from './views/Tasks';
 import TaskForm from './views/TaskForm';
 import Navbar from './components/Navbar';
 import { AuthProvider } from './context/AuthContext';
-import { TasksProvider } from './context/TasksContext';
+import { TaskProvider } from './context/TaskContext';
+import { ProtectedRoute } from './routes';
 
 function App() {
   return (
     <AuthProvider>
-      <TasksProvider>
+      <TaskProvider>
         <BrowserRouter>
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-
-            <Route path="/tasks" element={<Tasks />} />
-            <Route path="/tasks/new" element={<TaskForm />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/tasks" element={<Tasks />} />
+              <Route path="/add-task" element={<TaskForm />} />
+              <Route path="/tasks/:id" element={<TaskForm />} />
+              <Route path="/profile" element={<h1>Profile</h1>} />
+            </Route>
           </Routes>
         </BrowserRouter>
-      </TasksProvider>
+      </TaskProvider>
     </AuthProvider>
   );
 }

@@ -1,78 +1,94 @@
+import { useEffect } from 'react';
 import useAuth from '../context/useAuth';
+import { Link, useNavigate } from 'react-router-dom';
+import { Card, Message, Button, Input } from '../components/ui';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { registerSchema } from '../schemas/auth';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 function Register() {
-  const navigate = useNavigate();
+  const { signup, errors: registerErrors, isAuthenticated } = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-  const { register: registerUser, error } = useAuth();
-  const onSubmit = handleSubmit(async (data) => {
-    try {
-      await registerUser(data);
-      console.log('usuario registrado con exito', data);
-      navigate('/tasks');
-    } catch (error) {
-      console.error('Error registering', error);
-    }
+  } = useForm({
+    resolver: zodResolver(registerSchema),
   });
+  const navigate = useNavigate();
+
+  const onSubmit = async (value) => {
+    await signup(value);
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) navigate('/tasks');
+  }, [isAuthenticated, navigate]);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-stone-900 to-stone-950 font-mono">
-      <div className="card bg-base-100 max-w-sm shrink-0 shadow-xl border-primary border-2">
-        <form className="card-body gap-4" onSubmit={onSubmit}>
-          {error && (
-            <div className="bg-red-900 text-white p-2 rounded-lg font-mono animate-fade-in-out">
-              {error.error.map((err, index) => (
-                <div className="py-2" key={index}>
-                  <span className="font-bold text-red-500">ERROR : </span>
-                  <span className="text-slate-200">{err}</span>
-                </div>
-              ))}
-            </div>
-          )}
+    <div className="h-[calc(100vh-100px)] flex items-center justify-center">
+      <Card>
+        {registerErrors.map((error, i) => (
+          <Message message={error} key={i} />
+        ))}
+        <h1 className="text-3xl text-center font-bold">Registrarse</h1>
+        <form className="card-body gap-4" onSubmit={handleSubmit(onSubmit)}>
           <div className="form-control ">
-            <input
+            <Input
               type="text"
-              placeholder="name"
-              className="input input-bordered"
-              {...register('name', { required: true })}
+              name="username"
+              placeholder="Write your name"
+              {...register('username')}
+              autoFocus
             />
-            {errors.name && (
-              <span className="text-red-500">This field is required</span>
+            {errors.username?.message && (
+              <p className="text-red-500">{errors.username?.message}</p>
             )}
           </div>
           <div className="form-control ">
-            <input
-              type="email"
-              placeholder="email"
-              className="input input-bordered"
-              {...register('email', { required: true })}
+            <Input
+              name="email"
+              placeholder="youremail@domain.tld"
+              {...register('email')}
             />
-            {errors.email && (
-              <span className="text-red-500">This field is required</span>
+            {errors.email?.message && (
+              <p className="text-red-500">{errors.email?.message}</p>
             )}
           </div>
-          <div className="form-control">
-            <input
+          <div className="form-control ">
+            <Input
               type="password"
-              placeholder="password"
-              className="input input-bordered"
-              {...register('password', { required: true })}
+              name="password"
+              placeholder="********"
+              {...register('password')}
             />
-            {errors.password && (
-              <span className="text-red-500">This field is required</span>
+            {errors.password?.message && (
+              <p className="text-red-500">{errors.password?.message}</p>
             )}
           </div>
-          <div className="form-control mt-6">
-            <button className="btn btn-primary" type="submit">
-              Registrarse
-            </button>
+          <div className="form-control ">
+            <Input
+              type="password"
+              name="confirmPassword"
+              placeholder="********"
+              {...register('confirmPassword')}
+            />
+            {errors.confirmPassword?.message && (
+              <p className="text-red-500">{errors.confirmPassword?.message}</p>
+            )}
+            <div className="form-control mt-6">
+              <Button>Aceptar</Button>
+            </div>
           </div>
         </form>
-      </div>
+
+        <p className="text-center">
+          Tienes una cuenta?{' '}
+          <Link className="text-sky-500" to="/login">
+            Iniciar
+          </Link>
+        </p>
+      </Card>
     </div>
   );
 }

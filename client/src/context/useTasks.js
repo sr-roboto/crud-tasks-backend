@@ -1,9 +1,9 @@
 // useTasks.js
 import { useContext } from 'react';
-import { TasksContext } from './TasksContext';
+import { TaskContext } from './TaskContext';
 
 const useTasks = () => {
-  const context = useContext(TasksContext);
+  const context = useContext(TaskContext);
   if (!context) {
     throw new Error('useTasks must be used within a TasksProvider');
   }
