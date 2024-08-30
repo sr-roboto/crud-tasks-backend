@@ -7,6 +7,7 @@ const createTask = async (req, res) => {
       title,
       description,
       done,
+      user: req.user.id,
     });
     await task.save();
     res.status(201).json(task);
@@ -22,8 +23,8 @@ const createTask = async (req, res) => {
 
 const getTasks = async (req, res) => {
   try {
-    const tasks = await taskModel.find();
-    res.status(200).json(tasks);
+    const tasks = await taskModel.find({ user: req.user.id }).populate('user');
+    res.json(tasks);
   } catch (error) {
     if (error instanceof z.ZodError) {
       // Manejar errores de validación
@@ -35,8 +36,9 @@ const getTasks = async (req, res) => {
 
 const getTask = async (req, res) => {
   try {
-    const task = await taskModel.findById(req.params.id);
-    res.status(200).json(task);
+    const task = await taskModelask.findById(req.params.id);
+    if (!task) return res.status(404).json({ message: 'Task not found' });
+    return res.json(task);
   } catch (error) {
     if (error instanceof z.ZodError) {
       // Manejar errores de validación
@@ -48,8 +50,13 @@ const getTask = async (req, res) => {
 
 const updateTask = async (req, res) => {
   try {
-    await taskModel.findByIdAndUpdate(req.params.id, req.body);
-    res.status(200).json({ message: 'Task updated successfully' });
+    const { title, description, done } = req.body;
+    const taskUpdated = await Task.findOneAndUpdate(
+      { _id: req.params.id },
+      { title, description, done },
+      { new: true }
+    );
+    return res.json(taskUpdated);
   } catch (error) {
     if (error instanceof z.ZodError) {
       // Manejar errores de validación
