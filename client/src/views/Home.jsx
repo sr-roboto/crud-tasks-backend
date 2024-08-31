@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
+import PanicButton from '../components/ui/PanicButton';
 import img from '../assets/droll.svg';
 
 function Home() {
   return (
     <div className="md:mx-auto ">
-      <div className="hero bg-base-200 min-h-screen">
+      <div className="hero min-h-screen">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <img
             src={img}
@@ -26,6 +27,7 @@ function Home() {
           </div>
         </div>
       </div>
+      <PanicButton className="justify-center items-cente" />
     </div>
   );
 }
