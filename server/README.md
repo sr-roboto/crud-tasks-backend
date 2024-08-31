@@ -8,8 +8,6 @@ Este es un proyecto de backend para una aplicación CRUD de tareas, construido c
 - MongoDB (versión 4 o superior)
 
 ## Instalación
-
-
 1. Clona el repositorio:
 
    ```sh
@@ -17,34 +15,37 @@ Este es un proyecto de backend para una aplicación CRUD de tareas, construido c
    cd crud-tasks-backend/server
 
 2. Instala las dependencias:
-  npm install
+   ```sh
+   npm install
 3. Crea un archivo .env en la carpeta server basado en el archivo .env.template:
+   ```sh
    cp .env.template .env
-4. Configura las variables de entorno en el archivo .env
+5. Configura las variables de entorno en el archivo .env
    
-  PORT=8080
-  MONGODB_URI=mongodb://localhost:27017/task_crud
-  JWT_SECRET=qwerty
-  FRONTEND_URL=http://localhost:5173
+  .PORT=8080
+  .MONGODB_URI=mongodb://localhost:27017/task_crud
+  .JWT_SECRET=qwerty
+  .FRONTEND_URL=http://localhost:5173
 
-Uso
-1. Inicia el servidor: npm run dev
+##Uso
+1. Inicia el servidor
+   ```sh
+    npm run dev
 
-2. El servidor estará disponible en http://localhost:8080.
+3. El servidor estará disponible en http://localhost:8080.
 
--Endpoints:
+##Endpoints:
+###Autenticación
+-POST /auth/login: Iniciar sesión.
+-POST /auth/register: Registrar un nuevo usuario.
+###Tareas
+-POST /tasks: Crear una nueva tarea.
+-GET /tasks: Obtener todas las tareas.
+-GET /tasks/:id: Obtener una tarea por ID.
+-PUT /tasks/:id: Actualizar una tarea por ID.
+-DELETE /tasks/:id: Eliminar una tarea por ID.
 
-Autenticación
-POST /auth/login: Iniciar sesión.
-POST /auth/register: Registrar un nuevo usuario.
-Tareas
-POST /tasks: Crear una nueva tarea.
-GET /tasks: Obtener todas las tareas.
-GET /tasks/:id: Obtener una tarea por ID.
-PUT /tasks/:id: Actualizar una tarea por ID.
-DELETE /tasks/:id: Eliminar una tarea por ID.
-
-Estructura del Proyecto
+##Estructura del Proyecto
 crud-tasks-backend/
 ├── server/
 │   ├── src/
