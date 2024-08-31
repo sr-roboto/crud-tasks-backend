@@ -22,10 +22,10 @@ Este es un proyecto de backend para una aplicación CRUD de tareas, construido c
    cp .env.template .env
 5. Configura las variables de entorno en el archivo .env
    
-  _ PORT=8080
-  _ MONGODB_URI=mongodb://localhost:27017/task_crud
-  _ JWT_SECRET=qwerty
-  _ FRONTEND_URL=http://localhost:5173
+  - PORT=8080
+  - MONGODB_URI=mongodb://localhost:27017/task_crud
+  - JWT_SECRET=qwerty
+  - FRONTEND_URL=http://localhost:5173
 
 ## Uso
 1. Inicia el servidor
@@ -36,11 +36,11 @@ Este es un proyecto de backend para una aplicación CRUD de tareas, construido c
 
 ## Endpoints:
 1. Autenticación
-_ POST /auth/login: Iniciar sesión.
-_ POST /auth/register: Registrar un nuevo usuario.
+- POST /auth/login: Iniciar sesión.
+- POST /auth/register: Registrar un nuevo usuario.
 2. Tareas
-_ POST /tasks: Crear una nueva tarea.
-_ GET /tasks: Obtener todas las tareas.
-_ GET /tasks/:id: Obtener una tarea por ID.
-_ PUT /tasks/:id: Actualizar una tarea por ID.
-_ DELETE /tasks/:id: Eliminar una tarea por ID.
+- POST /tasks: Crear una nueva tarea.
+- GET /tasks: Obtener todas las tareas.
+- GET /tasks/:id: Obtener una tarea por ID.
+- PUT /tasks/:id: Actualizar una tarea por ID.
+- DELETE /tasks/:id: Eliminar una tarea por ID.
