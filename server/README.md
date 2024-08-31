@@ -27,35 +27,20 @@ Este es un proyecto de backend para una aplicación CRUD de tareas, construido c
   .JWT_SECRET=qwerty
   .FRONTEND_URL=http://localhost:5173
 
-##Uso
+## Uso
 1. Inicia el servidor
    ```sh
     npm run dev
 
 3. El servidor estará disponible en http://localhost:8080.
 
-##Endpoints:
-###Autenticación
--POST /auth/login: Iniciar sesión.
--POST /auth/register: Registrar un nuevo usuario.
-###Tareas
--POST /tasks: Crear una nueva tarea.
--GET /tasks: Obtener todas las tareas.
--GET /tasks/:id: Obtener una tarea por ID.
--PUT /tasks/:id: Actualizar una tarea por ID.
--DELETE /tasks/:id: Eliminar una tarea por ID.
-
-##Estructura del Proyecto
-crud-tasks-backend/
-├── server/
-│   ├── src/
-│   │   ├── controllers/
-│   │   ├── middleware/
-│   │   ├── models/
-│   │   ├── routes/
-│   │   ├── schemas/
-│   │   ├── app.js
-│   │   ├── dotenv.config.js
-│   ├── .env.template
-│   ├── package.json
-│   ├── README.md
+## Endpoints:
+### Autenticación
+- POST /auth/login: Iniciar sesión.
+- POST /auth/register: Registrar un nuevo usuario.
+### Tareas
+- POST /tasks: Crear una nueva tarea.
+- GET /tasks: Obtener todas las tareas.
+- GET /tasks/:id: Obtener una tarea por ID.
+- PUT /tasks/:id: Actualizar una tarea por ID.
+- DELETE /tasks/:id: Eliminar una tarea por ID.
