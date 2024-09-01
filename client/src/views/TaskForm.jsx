@@ -32,15 +32,17 @@ function TaskForm() {
   };
 
   useEffect(() => {
-    if (params.id) {
-      const loadTask = async () => {
+    const loadTask = async () => {
+      if (params.id) {
         const task = await getTask(params.id);
+        console.log(task);
         setValue('title', task.title);
         setValue('description', task.description);
-      };
-      loadTask();
-    }
-  }, [params.id, setValue, getTask]);
+        setValue('done', task.done);
+      }
+    };
+    loadTask();
+  }, []);
 
   return (
     <div className="h-[calc(100vh-10px)] flex items-center justify-center bg-base-200">

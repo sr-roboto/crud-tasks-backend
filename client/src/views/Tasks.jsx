@@ -8,7 +8,7 @@ function Tasks() {
 
   useEffect(() => {
     getTasks();
-  }, [getTasks]);
+  }, []);
 
   return (
     <>
@@ -23,7 +23,7 @@ function Tasks() {
         </div>
       )}
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2 m-4 ">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 m-4 ">
         {tasks.map((task) => (
           <TaskCard task={task} key={task._id} />
         ))}

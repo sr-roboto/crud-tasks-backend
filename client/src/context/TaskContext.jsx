@@ -22,6 +22,8 @@ function TaskProvider({ children }) {
     try {
       const res = await deleteTaskRequest(id);
       if (res.status === 204) setTasks(tasks.filter((task) => task._id !== id));
+      getTasks();
+      return res;
     } catch (error) {
       console.log(error);
     }
@@ -31,6 +33,7 @@ function TaskProvider({ children }) {
     try {
       const res = await createTaskRequest(task);
       console.log(res.data);
+      return res;
     } catch (error) {
       console.log(error);
     }
