@@ -1,37 +1,40 @@
 import useTasks from '../../context/useTasks';
-import { Button, ButtonLink, Card } from '../ui';
-import { useEffect } from 'react';
+import { Card, Label } from '../ui';
 import trash from '../../assets/img/Trash.svg';
 import edit from '../../assets/img/Edit.svg';
 import { Link } from 'react-router-dom';
 
-import PropTypes from 'prop-types';
-
 export function TaskCard({ task }) {
-  TaskCard.propTypes = {
-    task: PropTypes.object.isRequired,
-  };
   const { deleteTask } = useTasks();
 
   return (
     <Card>
-      <header className="flex justify-between">
-        <h1 className="text-2xl text-base-200 font-bold">{task.title}</h1>
-        <div className="flex-col justify-center w-8">
-          <button
-            className="hover:scale-125"
-            onClick={() => deleteTask(task._id)}
-          >
-            <img src={trash} />
-          </button>
-          <button className="hover:scale-125">
-            <Link to={`/tasks/${task._id}`}>
-              <img src={edit} />
-            </Link>
-          </button>
-        </div>
-      </header>
-      <p className="text-white ">{task.description}</p>
+      <div className=" float-right flex flex-col space-y-4 justify-center items-center ">
+        <button
+          className="hover:scale-125 transition duration-150"
+          onClick={() => deleteTask(task._id)}
+        >
+          <img src={trash} />
+        </button>
+        <button className="hover:scale-125 transition duration-150">
+          <Link to={`/tasks/${task._id}`}>
+            <img src={edit} />
+          </Link>
+        </button>
+      </div>
+
+      <div className="max-w-96  break-all">
+        <Label>Título:</Label>
+        <h1 className="text-xl text-base-200 font-bold ">{task.title}</h1>
+
+        <Label>Descripción:</Label>
+        <p className="text-white ">{task.description}</p>
+
+        <Label>Estado:</Label>
+        <p className="text-white  max-w-80">
+          {task.done ? 'Terminado' : 'Pendiente'}
+        </p>
+      </div>
     </Card>
   );
 }

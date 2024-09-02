@@ -4,6 +4,6 @@ export const Input = forwardRef((props, ref) => (
   <input
     {...props}
     ref={ref}
-    className="input input-ghost bg-base-300 text-primary"
+    className="input bg-primary-content text-base-content border border-base-300 focus:ring-primary-500"
   />
 ));

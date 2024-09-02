@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import { AuthProvider } from './context/AuthContext';
 import { TaskProvider } from './context/TaskContext';
 import { ProtectedRoute } from './routes';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               <Route path="/profile" element={<h1>Profile</h1>} />
             </Route>
           </Routes>
+          <Footer />
         </BrowserRouter>
       </TaskProvider>
     </AuthProvider>

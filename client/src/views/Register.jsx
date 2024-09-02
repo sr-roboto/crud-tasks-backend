@@ -31,7 +31,6 @@ function Register() {
         {registerErrors.map((error, i) => (
           <Message message={error} key={i} />
         ))}
-        <h1 className="text-3xl text-center font-bold">Registrarse</h1>
         <form className="card-body gap-4" onSubmit={handleSubmit(onSubmit)}>
           <div className="form-control ">
             <Input
@@ -82,9 +81,9 @@ function Register() {
           </div>
         </form>
 
-        <p className="text-center">
+        <p className="text-center text-base-content">
           Tienes una cuenta?{' '}
-          <Link className="text-sky-500" to="/login">
+          <Link className="text-info-content hover:text-info" to="/login">
             Iniciar
           </Link>
         </p>

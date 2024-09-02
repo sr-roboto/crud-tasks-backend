@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import {
   loginRequest,
   registerRequest,
@@ -45,6 +44,7 @@ const AuthProvider = ({ children }) => {
       setIsAuthenticated(true);
     } catch (error) {
       console.log(error);
+      setErrors(error.response.data.message);
       // setErrors(error.response.data.message);
     }
   };
@@ -95,10 +95,6 @@ const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
-};
-
-AuthProvider.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export { AuthContext, AuthProvider };

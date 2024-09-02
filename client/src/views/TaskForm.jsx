@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 
 function TaskForm() {
   const { createTask, getTask, updateTask } = useTasks();
+
   const navigate = useNavigate();
   const params = useParams();
   console.log(params.id);
@@ -71,6 +72,20 @@ function TaskForm() {
               {...register('description')}
             ></Textarea>
           </div>
+          <div className="form-control">
+            <label className="label cursor-pointer">
+              <span className="label-text text-primary-content ">
+                Completada
+              </span>
+              <input
+                type="checkbox"
+                name="done"
+                id="done"
+                {...register('done')}
+              />
+            </label>
+          </div>
+
           <div className="form-control ">
             <Button>Guardar</Button>
           </div>

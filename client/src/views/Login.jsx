@@ -26,13 +26,12 @@ function Login() {
   }, [isAuthenticated, navigate]);
 
   return (
-    <div className="h-[calc(100vh-10px)] flex items-center justify-center bg-base-200">
+    <div className="h-[calc(100vh-10px)] min-w-px flex items-center justify-center bg-base-300 glass">
       <Card>
         {loginErrors.map((error, i) => (
           <Message message={error} key={i} />
         ))}
 
-        <h1 className="text-3xl text-center font-bold">Iniciar Sesión</h1>
         <form className="card-body gap-4" onSubmit={handleSubmit(onSubmit)}>
           <div className="form-control ">
             <Input
@@ -42,7 +41,9 @@ function Login() {
               placeholder="youremail@domain.tld"
               {...register('email', { required: true })}
             />
-            <p>{errors.email?.message}</p>
+            <p className="text-error-content text-sm">
+              {errors.email?.message}
+            </p>
           </div>
           <div className="form-control ">
             <Input
@@ -51,16 +52,18 @@ function Login() {
               placeholder="Write your password"
               {...register('password', { required: true, minLength: 6 })}
             />
-            <p>{errors.password?.message}</p>
+            <p className="text-error-content text-sm">
+              {errors.password?.message}
+            </p>
             <div className="form-control mt-6">
-              <Button>Aceptar</Button>
+              <Button className="text-secondary-content ">Aceptar</Button>
             </div>
           </div>
         </form>
 
-        <p className="text-center">
+        <p className="text-center text-base-content">
           No estas registrado?{' '}
-          <Link to="/register" className="text-sky-500">
+          <Link to="/register" className="text-info-content hover:text-info">
             Registrate
           </Link>
         </p>

@@ -11,8 +11,8 @@ function Navbar() {
     <>
       {isAuthenticated ? (
         <>
-          <div className="navbar bg-primary text-white sticky top-0">
-            <div className="navbar-start">
+          <div className="navbar bg-secondary text-secondary-content-content sticky top-0">
+            <div className="navbar-start bg-secondary text-secondary-content">
               <div className="dropdown">
                 <div
                   tabIndex={0}
@@ -36,9 +36,8 @@ function Navbar() {
                 </div>
                 <ul
                   tabIndex={0}
-                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                  className="menu menu-sm dropdown-content bg-secondary text-secondary-content rounded-box z-[1] mt-3 w-52 p-2 shadow"
                 >
-                  <li>Welcome {user.username}</li>
                   <li>
                     <Link to="/add-task">
                       <img src={plus} />
@@ -58,9 +57,8 @@ function Navbar() {
                 QwertyQuick
               </Link>
             </div>
-            <p className="text-center">{user.username}</p>
-            <div className="navbar-end hidden lg:flex">
-              <ul className="menu menu-horizontal px-1  text-base">
+            <div className="navbar-end hidden bg-secondary text-secondary-content lg:flex">
+              <ul className="menu menu-horizontal px-1  text-base flex">
                 <li>
                   <Link to="/add-task">
                     <img src={plus} />
@@ -77,7 +75,7 @@ function Navbar() {
         </>
       ) : (
         <>
-          <div className="navbar bg-primary text-white sticky top-0 flex justify-start">
+          <div className="navbar bg-secondary text-secondary-content sticky top-0 flex justify-start">
             {' '}
             {/* Modified line */}
             <div className="navbar-start">
@@ -104,7 +102,7 @@ function Navbar() {
                 </div>
                 <ul
                   tabIndex={0}
-                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                  className="menu menu-sm dropdown-content text-primary rounded-box z-[1] mt-3 w-52 p-2 shadow"
                 >
                   <li>
                     <Link to="/login">Iniciar Sesión</Link>
@@ -122,7 +120,7 @@ function Navbar() {
               </Link>
             </div>
             <div className="navbar-end hidden lg:flex">
-              <ul className="menu menu-horizontal px-1  text-base">
+              <ul className="menu menu-horizontal px-1 flex">
                 <li>
                   <Link to="/login">Iniciar Sesión</Link>
                 </li>

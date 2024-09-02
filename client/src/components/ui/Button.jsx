@@ -1,9 +1,6 @@
 export function Button({ onClick, children }) {
   return (
-    <button
-      className="btn btn-xs sm:btn-sm md:btn-md lg:btn-md bg-base-200 hover:bg-success"
-      onClick={onClick}
-    >
+    <button className="btn bg-neutral-content border-none " onClick={onClick}>
       {children}
     </button>
   );

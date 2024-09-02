@@ -1,5 +1,4 @@
 import { createContext, useState } from 'react';
-import PropTypes from 'prop-types';
 import {
   createTaskRequest,
   getTasksRequest,
@@ -7,11 +6,13 @@ import {
   updateTaskRequest,
   deleteTaskRequest,
 } from '../api/tasksRequest';
+import { useEffect } from 'react';
 
 const TaskContext = createContext();
 
 function TaskProvider({ children }) {
   const [tasks, setTasks] = useState([]);
+  const [errors, setErrors] = useState([]);
 
   const getTasks = async () => {
     const res = await getTasksRequest();
@@ -36,6 +37,7 @@ function TaskProvider({ children }) {
       return res;
     } catch (error) {
       console.log(error);
+      setErrors(error.response.data.message);
     }
   };
 
@@ -53,6 +55,7 @@ function TaskProvider({ children }) {
       await updateTaskRequest(id, task);
     } catch (error) {
       console.error(error);
+      setErrors(error.response.data.message);
     }
   };
 
@@ -71,9 +74,5 @@ function TaskProvider({ children }) {
     </TaskContext.Provider>
   );
 }
-
-TaskProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 export { TaskProvider, TaskContext };

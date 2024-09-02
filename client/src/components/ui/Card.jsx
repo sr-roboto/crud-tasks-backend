@@ -1,7 +1,7 @@
 export function Card({ children }) {
   return (
-    <div className="max-w-md flex-wrap bg-base-100 border-2 border-opacity-50 rounded-xl text-base-200">
-      <div className="max-w-md w-full p-8 shadow-2xl rounded-xl  bg-zinc-800">
+    <div className="flex-wrap rounded-xl text-base-200  ">
+      <div className="glass p-5 shadow-xl rounded-xl bg-gray-800 transition max-w-md max-h-dvh hover:-translate-y-1 ease-in duration-200 ">
         {children}
       </div>
     </div>
